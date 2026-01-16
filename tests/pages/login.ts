@@ -15,7 +15,7 @@ export class LoginPage{
         await this.page.goto('https://demo-bank.vercel.app/');
     }
 
-    async login(username: string, password: string){
+    async login(username: string, password: string): Promise<void>{
         await this.loginInput.fill(username);
         await this.passwordInput.fill(password);
         await this.loginButton.click();

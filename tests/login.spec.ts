@@ -17,7 +17,7 @@ test.describe('User login to Demobank', () => {
     await new_page.assertLoginError('identyfikator ma min. 8 znaków');
   });
 
-  test.only('unsuccessfull login with too short password', async ({ page }) => {
+  test('unsuccessfull login with too short password', async ({ page }) => {
     const new_page = new LoginPage(page);
     await new_page.open();
     await new_page.triggerPasswordValidation("test12");

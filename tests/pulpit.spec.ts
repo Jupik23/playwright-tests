@@ -12,8 +12,14 @@ test.describe('Main dashboard tests', () => {
         await login_page.asserUserIsLogged(User.validUser.fullname);
     });
 
-    test.only("Sending new transfer", async({page}) => {
-        const pulpit = new Pulpit(page);
+    test("Sending new transfer", async({page}) => {
+        const pulpit = new Pulpit(page);    
         await pulpit.sendTransfer(160);
     });
+    test.only("Success phone top up", async({page})=>{
+        const pulpit = new Pulpit(page);
+        const amount = 50;
+        await pulpit.phoneTopUp('502 xxx xxx', amount);
+        await pulpit.assertTopUpMessage('502 xxx xxx', amount)
+    })
 })

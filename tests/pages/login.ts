@@ -1,15 +1,21 @@
-import {Page, expect} from '@playwright/test'
+import {Locator, Page, expect} from '@playwright/test'
 
 export class LoginPage{
-    constructor(private readonly page: Page){}
+    private readonly loginInput: Locator;
+    private readonly passwordInput: Locator;
+    private readonly loginButton: Locator;
+    private readonly userNameLabel: Locator;
+    private readonly usernameError: Locator;
+    private readonly passwordError: Locator; 
+    constructor(private readonly page: Page){
+        this.loginInput= page.getByTestId('login-input');
+        this.passwordInput= page.getByTestId('password-input');
+        this.loginButton= page.getByTestId('login-button');
+        this.userNameLabel = page.getByTestId('user-name');
+        this.usernameError = page.getByTestId('error-login-id');
+        this.passwordError= page.getByTestId('error-login-password');
+    }
 
-    private readonly loginInput = this.page.getByTestId('login-input')
-    private readonly passwordInput = this.page.getByTestId('password-input');
-    private readonly loginButton = this.page.getByTestId('login-button');
-    private readonly userNameLabel = this.page.getByTestId('user-name');
-
-    private readonly usernameError = this.page.getByTestId('error-login-id');
-    private readonly passwordError = this.page.getByTestId('error-login-password');
 
     async open(): Promise<void> {
         await this.page.goto('https://demo-bank.vercel.app/');
